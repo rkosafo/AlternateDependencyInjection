@@ -10,6 +10,7 @@ namespace AltDependencyManagement.DependencyInjection
         {
             SmsService.setImplementation<HubtelSmsService>();
             EmailService.setImplementation<ElasticEmailService>();
+            UssdService.setImplementation<NaloUssdService>();
         }
     }
 }

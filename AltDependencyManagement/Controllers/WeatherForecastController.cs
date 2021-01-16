@@ -44,5 +44,15 @@ namespace AltDependencyManagement.Controllers
             if (ret.error != null) return BadRequest(ret.error.GetBaseException().Message);
             return Ok(ret.id);
         }
+
+        [HttpPost("sendUssd")]
+        public async Task<IActionResult> sendUssd(UssdMessage message)
+        {
+            var ret = await UssdService.singleton.send(message);
+            if (ret.error != null) return BadRequest(ret.error.GetBaseException().Message);
+            ret = await UssdService.transient().send(message);
+            if (ret.error != null) return BadRequest(ret.error.GetBaseException().Message);
+            return Ok(ret.id);
+        }
     }
 }
